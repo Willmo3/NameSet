@@ -12,3 +12,5 @@ We then use that count as a Lego set ID and query the Rebrickable API for an ass
 NOTE: in order to increase the likelihood of finding a Lego set with the specified count, we reduce the count field to a four digit number. There are relatively few sets with a five digit ID, and so most searches to the Rebrickable API with a five digit ID will return nothing.
 
 Speaking of nothing: if you don't have an associated Lego set (i.e. your count, even when manipulated, doesn't map to a set), you get the 2008 clone trooper battle pack. Seems like a fair consolation to me!
+
+See online: https://willmo3.github.io/NameSet/
