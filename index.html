@@ -12,20 +12,22 @@
 </head>
 
 <body>
-  <header>
-    <h1>NameLegoSet</h1>
-    <p>Get your Lego set today!</p>
-  </header>
-  <p>Enter first name for your personal Lego set!</p>
-  <form id="lego-search">
-    <div id="search-items">
-      <input placeholder="Name" aria-label="Search" name="query">
-      <button type="submit" id="searchbtn">Search</button>
+    <!-- Ensure that margins of header match starting width of content -->
+    <header class="w-full px-5 py-5 md:px-0 md:px-[calc(10%)] lg:px-[calc(25%)] bg-red-500 text-white">
+      <h1 class="text-4xl">NameLegoSet</h1>
+      <p class="text-lg mt-2">Enter name for personal Lego set!</p>
+    </header>
+    <div class="w-full flex justify-center">
+    <!-- On larger screens, can't really use screen real estate. -->
+      <div class="w-[calc(90%)] md:w-4/5 lg:w-1/2">
+        <form class="md:px-0" id="lego-search">
+          <input class="w-full py-4 my-2" placeholder="Name" aria-label="Search" name="query">
+          <button class="w-full py-4 text-white bg-red-500 rounded-sm" type="submit" id="searchbtn">Search</button>
+        </form>
+        <div id="details"></div>
+        <script src="scripts/main.js"></script>
+      </div>
     </div>
-  </form>
-  <div id="details">
-  </div>
-  <script src="scripts/main.js"></script>
 </body>
 
 </html>

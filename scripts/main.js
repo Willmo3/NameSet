@@ -47,9 +47,12 @@ search.onsubmit = (ev) => {
         }
 
         // Prepare attributes that will be needed in all cases.
-        const header = document.createElement("h2");
-        const caption = document.createElement("p");
-        const button = document.createElement("button");
+        const header = document.createElement('h2');
+        const button = document.createElement('button');
+
+        // Tailwind classes for color
+        header.setAttribute('class', 'my-5 text-gray-700');
+        button.setAttribute('class', 'mb-5 text-red-500 font-bold')
 
         // Need to place button and caption in div so that it's horizontal on desktop
         // and vertical on mobile.
@@ -61,17 +64,14 @@ search.onsubmit = (ev) => {
         });
 
         details.appendChild(header);
-        details.appendChild(caption);
         details.appendChild(button);
             
         // if json not found, go for all defaults.
         if (recentJson.detail === notFound) {
             recentJson = idMap.get("8014-1");
-            header.textContent = "No set found!";
-            caption.textContent = "You don't have a unique set. Here's the 2009 Clone Trooper Battlepack.";
+            header.textContent = "You don't have a unique set. Here's the 2009 Clone Trooper Battlepack!";
         } else {
-            header.textContent = "Your set!";
-            caption.textContent = `Your set is: ${recentJson.name}`;
+            header.textContent = `Your set is: ${recentJson.name}`;
         }
     });
 }
@@ -161,7 +161,12 @@ function placeDetails() {
     list.appendChild(pieces);
     list.appendChild(image);
 
+    // Slight indentation for list
+    list.setAttribute('class', 'ml-2');
+
     image.setAttribute("src", recentJson.set_img_url);
+    // Give some whitespace below image.
+    image.setAttribute('class', 'mb-10');
 
     name.innerText = `Set Name: ${recentJson.name}`;
     num.innerText = `Set Num: ${recentJson.set_num}`;
