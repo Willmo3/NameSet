@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "Get your personalized Lego set!",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "tw": "npx tailwindcss -i ./styles/input.css -o ./styles/output.css"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Willmo3/NameSet.git"
