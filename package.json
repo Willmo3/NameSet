@@ -1,0 +1,22 @@
+{
+  "name": "nameset",
+  "version": "0.1.0",
+  "description": "Get your personalized Lego set!",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Willmo3/NameSet.git"
+  },
+  "keywords": [
+    "Lego",
+    "NameSet",
+    "Willmo3"
+  ],
+  "author": "Willmo3",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Willmo3/NameSet/issues"
+  },
+  "homepage": "https://github.com/Willmo3/NameSet#readme"
+}
