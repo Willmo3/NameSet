@@ -51,12 +51,8 @@ search.onsubmit = (ev) => {
         const caption = document.createElement("p");
         const button = document.createElement("button");
 
-        header.setAttribute("class", "content heading");
-
         // Need to place button and caption in div so that it's horizontal on desktop
         // and vertical on mobile.
-        caption.setAttribute("class", "content");
-        button.setAttribute("class", "content");
         button.setAttribute("id", "details-button");
 
         button.innerText = "Show Details";
@@ -164,12 +160,6 @@ function placeDetails() {
     list.appendChild(year);
     list.appendChild(pieces);
     list.appendChild(image);
-
-    name.setAttribute("class", "content");
-    num.setAttribute("class", "content");
-    year.setAttribute("class", "content");
-    pieces.setAttribute("class", "content");
-    image.setAttribute("class", "content");
 
     image.setAttribute("src", recentJson.set_img_url);
 
