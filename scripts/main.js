@@ -69,7 +69,7 @@ search.onsubmit = (ev) => {
         details.appendChild(button);
             
         // if json not found, go for all defaults.
-        if (recentJson.detail == notFound) {
+        if (recentJson.detail === notFound) {
             recentJson = idMap.get("8014-1");
             header.textContent = "No set found!";
             caption.textContent = "You don't have a unique set. Here's the 2009 Clone Trooper Battlepack.";
@@ -187,7 +187,7 @@ function placeDetails() {
 function hideDetails() {
     const details = document.querySelector("#details");
 
-    while (details.lastChild != null && details.lastChild.nodeName != "BUTTON") {
+    while (details.lastChild != null && details.lastChild.nodeName !== "BUTTON") {
         details.removeChild(details.lastChild);
     }
 }
