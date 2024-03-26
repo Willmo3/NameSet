@@ -4,7 +4,7 @@ const rebrickKey = "3ae977e22655ff1212ccb6254507ae41";
 const details = document.querySelector("#details");
 const search = document.querySelector("#lego-search");
 
-const dImgSrc = "img/8014-1.png";
+// Return value from API when no set found for ID.
 const notFound = "Not found.";
 
 // Maps to prevent excessive API calls.
