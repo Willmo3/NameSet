@@ -11,12 +11,11 @@ const notFound = "Not found.";
 // Since these will only exist through a single session, we don't need to check for API updates
 // after initial caching.
 const idMap = new Map();
-const nameMap = new Map();
 
 // Most recently accessed data.
 let recentJson = null;
 // Get default set.
-fetchSet("8014-1");
+fetchSet(8014);
 
 /**
  * Handle a search attempt.
@@ -35,9 +34,8 @@ fetchSet("8014-1");
 search.onsubmit = (ev) => {
     ev.preventDefault();
 
-    const pname = new FormData(ev.target).get("query");
-    fetchSum(pname)
-    .then(fetchSet)
+    const name_code = hash_code(new FormData(ev.target).get("query"))
+    fetchSet(name_code)
     .then((json) => {
         recentJson = json; // Using a global variable for RecentJson for event listeners.
 
@@ -77,31 +75,19 @@ search.onsubmit = (ev) => {
 }
 
 /**
- * Fetches the number of entries in the  web database associated with this name.
- * 
- * @param {String} name Name of user to grab total.
- * @return the number of entries associated with this name.
+ * Hash a string (i.e. a name) to get a lego set.
+ * Credit: stackoverflow.com/questions/194846/is-there-hash-code-function-accepting-any-object-type
+ * @param string String to hash
+ * @returns hash result
  */
-function fetchSum(name) {
-    // Since case doesn't matter for API, don't cause extraneous calls for case.
-    name = name.toLowerCase();
-
-    if (!nameMap.has(name)) {
-        console.log("Fetching");
-        nameMap.set(name, 
-        fetch(`https://api.agify.io?name=${name}`)
-        .then((resp) => {
-            return resp.json();
-        })
-        .then((json) => {
-            return json.count;
-        })
-        .then((sum) => {
-            return sum % 10000 + "-1";
-        }));
+function hash_code(string) {
+    let hash = 0;
+    for (let c of string) {
+        const code = c.charCodeAt(0);
+        hash = ((hash<<5)-hash)+code;
+        hash = hash & hash;
     }
-
-    return nameMap.get(name);
+    return hash;
 }
 
 /**
@@ -111,9 +97,12 @@ function fetchSum(name) {
  * @return the set associated with this id.
  */
 async function fetchSet(id) {
-    console.log(id);
+    // Set numbers become incredibly sparse after 10000.
+    // Future feature might be dynamic finding attempts.
+    id = id % 10000;
+    id += "-1";
+
     if (!idMap.has(id)) {
-        console.log("Fetching");
         const json = await fetch(`https://rebrickable.com/api/v3/lego/sets/${id}/?key=${rebrickKey}`)
             .then((resp) => {
                 return resp.json();
@@ -124,7 +113,7 @@ async function fetchSet(id) {
     return idMap.get(id);
 }
 
-/* Details button handlers */
+// ***** DETAILS BUTTON HANDLERS ***** //
 
 /**
  * Toggle the button:
