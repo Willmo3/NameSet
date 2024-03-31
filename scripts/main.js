@@ -14,7 +14,8 @@ const idMap = new Map();
 
 // Most recently accessed data.
 let recentJson = null;
-// Get default set.
+// Prime map with default set, 8014.
+const defaultSet = 8014;
 fetchSet(8014);
 
 /**
@@ -66,7 +67,7 @@ search.onsubmit = (ev) => {
             
         // if json not found, go for all defaults.
         if (recentJson.detail === notFound) {
-            recentJson = idMap.get("8014-1");
+            recentJson = idMap.get(defaultSet);
             header.textContent = "You don't have a unique set. Here's the 2009 Clone Trooper Battlepack!";
         } else {
             header.textContent = `Your set is: ${recentJson.name}`;
@@ -81,6 +82,8 @@ search.onsubmit = (ev) => {
  * @returns hash result
  */
 function hash_code(string) {
+    // Don't want to have caps sensitivity!
+    string = string.toLowerCase();
     let hash = 0;
     for (let c of string) {
         const code = c.charCodeAt(0);
@@ -97,19 +100,41 @@ function hash_code(string) {
  * @return the set associated with this id.
  */
 async function fetchSet(id) {
-    // Set numbers become incredibly sparse after 10000.
-    // Future feature might be dynamic finding attempts.
-    id = id % 10000;
+    // There are no lego sets with a number beyond the 10000 range.
+    id = id % 100000;
 
+    // prime our data structure with the first lookup
     if (!idMap.has(id)) {
-        const json = await fetch(`https://rebrickable.com/api/v3/lego/sets/${id}-1/?key=${rebrickKey}`)
-            .then((resp) => {
-                return resp.json();
-            });
+        const json = await queryAPI(id);
+        idMap.set(id, json);
+    }
+
+    // Key problem with getting a set: sparse number ranges.
+    // Keep trying until we find a set, or there's no chance left!
+    // Reducing in increments of 10 to avoid overwhelming the API
+    const divisor = 10;
+    let new_id = id;
+    while (idMap.get(id).detail === notFound && new_id > 1) {
+        new_id = Math.round(new_id / divisor);
+        const json = await queryAPI(new_id);
         idMap.set(id, json);
     }
 
     return idMap.get(id);
+}
+
+/**
+ * Query the API for a given id.
+ * New data will be contained in IdMap
+ *
+ * @param id ID to query
+ * @returns result of API query
+ */
+async function queryAPI(id) {
+    return fetch(`https://rebrickable.com/api/v3/lego/sets/${id}-1/?key=${rebrickKey}`)
+        .then((resp) => {
+            return resp.json();
+        });
 }
 
 // ***** DETAILS BUTTON HANDLERS ***** //
