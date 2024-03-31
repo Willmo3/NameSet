@@ -100,10 +100,9 @@ async function fetchSet(id) {
     // Set numbers become incredibly sparse after 10000.
     // Future feature might be dynamic finding attempts.
     id = id % 10000;
-    id += "-1";
 
     if (!idMap.has(id)) {
-        const json = await fetch(`https://rebrickable.com/api/v3/lego/sets/${id}/?key=${rebrickKey}`)
+        const json = await fetch(`https://rebrickable.com/api/v3/lego/sets/${id}-1/?key=${rebrickKey}`)
             .then((resp) => {
                 return resp.json();
             });
