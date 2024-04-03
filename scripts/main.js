@@ -1,4 +1,4 @@
-const rebrickKey = "3ae977e22655ff1212ccb6254507ae41";
+import { rebrickKey } from "./key.js";
 
 // Constantly needed elements.
 const details = document.querySelector("#details");
