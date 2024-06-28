@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Willmo3/NameSet/issues"
   },
-  "homepage": "https://github.com/Willmo3/NameSet#readme"
+  "homepage": "https://github.com/Willmo3/NameSet#readme",
+  "dependencies": {
+    "tailwindcss": "3.1.0"
+  }
 }
