@@ -5,7 +5,8 @@ const details = document.querySelector("#details");
 const search = document.querySelector("#lego-search");
 
 // Return value from API when no set found for ID.
-const notFound = "Not found.";
+// BE ADVISED: this may change at a moment's notice!
+const notFound = "No Set matches the given query.";
 
 // Maps to prevent excessive API calls.
 // Since these will only exist through a single session, we don't need to check for API updates
